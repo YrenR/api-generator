@@ -1,0 +1,9 @@
+apis:
+  comun@v1:
+    root: http://localhost:9080/q/openapi.yaml
+    x-openapi-ts:
+      output: ./openapi-typescript/comun-v1.ts
+  cae@v1:
+    root: http://localhost:9083/q/openapi.yaml
+    x-openapi-ts:
+      output: ./openapi-typescript/cae-v1.ts

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "openapi-typescript": "npx  openapi-typescript --root-types --enum"
+  },
+  "dependencies": {
+    "@web-bee-ru/openapi-axios": "^0.0.5",
+    "openapi-typescript": "^7.4.1"
+  }
+}

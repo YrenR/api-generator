@@ -1,0 +1,2226 @@
+---
+openapi: 3.0.3
+info:
+  title: comun API
+  version: 1.0-SNAPSHOT
+tags:
+- name: Autónomo
+  description: Servicio de autónomo
+- name: Categoría recurso-material
+  description: Servicio de categorías de recursos materiales
+- name: Configuración
+  description: Servicio de configuraciones
+- name: Criterio Estándar
+  description: Servicio de Criterio estándar
+- name: Empresa
+  description: Servicio de Empresa
+- name: Idioma
+  description: Servicio de Idioma
+- name: Persona
+  description: Servicio de Persona
+- name: Tipo Documento Informatizado
+  description: Servicio de Tipo documento informatizado
+- name: Tipo Documento Universal
+  description: Servicio de Tipo documento universal
+paths:
+  /comun/v1/autonomos/{idEmpresa}:
+    get:
+      tags:
+      - Autónomo
+      summary: Devuelve los datos de un autónomo
+      operationId: getAutonomoPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutonomoDtoResponse"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    put:
+      tags:
+      - Autónomo
+      summary: Edita los datos de un autónomo
+      operationId: putAutonomoPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutonomoDtoRequestUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutonomoDtoResponse"
+        "403":
+          description: "- COM_0009 : No se puede modificar los datos de una empresa"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/categorias-recursos-materiales:
+    get:
+      tags:
+      - Categoría recurso-material
+      summary: Devuelve las categorías de recursos materiales filtradas
+      operationId: getCategoriasRecursosMateriales
+      parameters:
+      - name: idPais
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoriaRecursoMaterialDTO_GET"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/categorias-recursos-materiales/{idCategoria}:
+    get:
+      tags:
+      - Categoría recurso-material
+      summary: Busca la entidad correspondiente al ID introducido
+      operationId: getCategoriaRecursoMaterialPorIdCategoria
+      parameters:
+      - name: idCategoria
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoriaRecursoMaterialDTO_GET"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/categorias-recursos-materiales/{idCategoria}/tipos-recursos-materiales:
+    get:
+      tags:
+      - Categoría recurso-material
+      summary: Obtiene los TipoRecursoMaterial de una categoría
+      operationId: getTiposRecursosMaterialesPorIdCategoria
+      parameters:
+      - name: idCategoria
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TipoRecursoMaterialDTO_GET"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/categorias-recursos-materiales/{idCategoria}/tipos-recursos-materiales/{idTipoRecursoMaterial}:
+    get:
+      tags:
+      - Categoría recurso-material
+      summary: Obtiene el TipoRecursoMaterial de una categoría por id
+      operationId: getTipoRecursoMaterialPorIdTipoRecursoMaterialPorIdCategoria
+      parameters:
+      - name: idCategoria
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: idTipoRecursoMaterial
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoRecursoMaterialDTO_GET"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/configuraciones/zonas-horarias:
+    get:
+      tags:
+      - Configuración
+      summary: Obtiene una lista de posibles franjas horarias a seleccionar por el
+        usuario
+      operationId: getZonasHorariasConfiguraciones
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - jwt: []
+  /comun/v1/criterios-estandar:
+    get:
+      tags:
+      - Criterio Estándar
+      summary: Devuelve un listado con todos los criterios estándar.
+      operationId: getCriteriosEstandar
+      parameters:
+      - name: ids
+        in: query
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CriterioEstandarDtoResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/empresas:
+    get:
+      tags:
+      - Empresa
+      summary: Recupera el listado de empresas mediante unos parámetros
+      description: "Si no se pasan parámetros, devolverá todas las empresas"
+      operationId: getEmpresas
+      parameters:
+      - name: CIF
+        in: query
+        schema:
+          type: string
+      - name: filtro
+        in: query
+        schema:
+          type: string
+      - name: infoEntornos
+        in: query
+        schema:
+          default: false
+          type: boolean
+      - name: listaIds
+        in: query
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      - name: listaIdsPais
+        in: query
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      - name: listaModulos
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/ModuloEnum"
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmpresaDtoResponse"
+        "401":
+          description: Forbidden
+        "403":
+          description: "- COM_0005 : No puede filtrar solo por provincia"
+      security:
+      - jwt: []
+  /comun/v1/empresas/contar:
+    get:
+      tags:
+      - Empresa
+      summary: Obtiene el numero de empresas dadas de alta en el sistema
+      operationId: getContarEmpresas
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      x-permisos: true
+  /comun/v1/empresas/{idEmpresa}:
+    get:
+      tags:
+      - Empresa
+      summary: Recupera una empresa por su id
+      operationId: getEmpresaPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmpresaDtoResponse"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+    put:
+      tags:
+      - Empresa
+      summary: Actualiza una empresa existente
+      operationId: putEmpresaPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmpresaDtoRequestUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmpresaDtoResponse"
+        "403":
+          description: "- COM_0008 : No se puede modificar los datos de un autónomo"
+        "404":
+          description: Not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    delete:
+      tags:
+      - Empresa
+      summary: Borra una empresa
+      operationId: deleteEmpresaPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmpresaDtoResponse"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/empresas/{idEmpresa}/logotipo:
+    post:
+      tags:
+      - Empresa
+      summary: Crea o modifica un logotipo para una empresa determinada
+      description: '*La llamada POST creará el archivo en BBDD en caso de no existir
+        o lo actualizará en caso contrario'
+      operationId: postLogotipoPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - file
+              - fileName
+              type: object
+              properties:
+                file:
+                  format: binary
+                  minLength: 1
+                  type: string
+                fileName:
+                  minLength: 1
+                  type: string
+            encoding:
+              fileName:
+                contentType: text/plain
+              file:
+                contentType: application/octet-stream
+      responses:
+        "201":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ArchivoDTO_GET"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    delete:
+      tags:
+      - Empresa
+      summary: Borra el logotipo de una empresa
+      operationId: deleteLogotipoPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ArchivoDTO_GET"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/empresas/{idEmpresa}/logotipo/informacion:
+    get:
+      tags:
+      - Empresa
+      summary: "Comprueba que la empresa tiene foto, devuelve información"
+      operationId: getInformacionLogotipoPorIdEmpresa
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchivoDTO_GET_INFO"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/empresas/{idEmpresa}/logotipo/{uuid}:
+    get:
+      tags:
+      - Empresa
+      summary: Recupera el logotipo de una empresa determinada
+      description: '*Este método necesita únicamente el jwt a través de la URL'
+      operationId: getLogotipoPorIdEmpresaPorUuid
+      parameters:
+      - name: idEmpresa
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: alto
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: ancho
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: modoMiniaturizacion
+        in: query
+        schema:
+          $ref: "#/components/schemas/FormatoEnum"
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  format: byte
+                  type: string
+        "401":
+          description: No autorizado
+        "404":
+          description: Not Found
+      security:
+      - jwt: []
+  /comun/v1/idiomas:
+    get:
+      tags:
+      - Idioma
+      summary: Recupera todos los idiomas que hay en la aplicación
+      operationId: getIdiomas
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdiomaDtoResponse"
+        "404":
+          description: Not Found
+  /comun/v1/idiomas/{idIdioma}:
+    get:
+      tags:
+      - Idioma
+      summary: Recupera un idioma que hay en la aplicación
+      operationId: getIdiomasPorIdIdioma
+      parameters:
+      - name: idIdioma
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IdiomaDtoResponse"
+        "404":
+          description: Not Found
+  /comun/v1/personas:
+    get:
+      tags:
+      - Persona
+      summary: Recupera todas las personas o la persona por el dni de su pasaporte
+        y país
+      operationId: getPersonas
+      parameters:
+      - name: dniPasaporte
+        in: query
+        schema:
+          type: string
+      - name: idPaisDni
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: listaIdsPersonas
+        in: query
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonaDTO_GET"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    post:
+      tags:
+      - Persona
+      summary: Crea una nueva persona
+      operationId: postPersona
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonaDTO_POST_PUT"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonaDTO_GET"
+        "403":
+          description: "- COM_0004 : La persona ya existe (DNI/Pasaporte - País) pero\
+            \ el nombre introducido no es correcto"
+        "401":
+          description: Unauthorized
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/personas/contar:
+    get:
+      tags:
+      - Persona
+      summary: Cuento el numero de personas dadas de alta en el sistema
+      operationId: getContarPersonas
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      x-permisos: true
+  /comun/v1/personas/{idPersona}:
+    get:
+      tags:
+      - Persona
+      summary: Recupera una persona por su id
+      operationId: getPersonaPorIdPersona
+      parameters:
+      - name: idPersona
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonaDTO_GET"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    put:
+      tags:
+      - Persona
+      summary: Actualiza una persona existente
+      operationId: putPersonaPorIdPersona
+      parameters:
+      - name: idPersona
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonaDTO_POST_PUT"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonaDTO_GET"
+        "404":
+          description: Not found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+    delete:
+      tags:
+      - Persona
+      summary: Borra una persona
+      operationId: deletePersonaPorIdPersona
+      parameters:
+      - name: idPersona
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: true
+  /comun/v1/tipos-documentos-informatizados:
+    get:
+      tags:
+      - Tipo Documento Informatizado
+      summary: Devuelve todos los tipo documento informatizados del sistema
+      operationId: getTiposDocumentosInformatizados
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TipoDocumentoInformatizadoDtoResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/tipos-documentos-informatizados/{idTipoDocumentoInformatizado}:
+    get:
+      tags:
+      - Tipo Documento Informatizado
+      summary: Devuelve tipo documento informatizado segun el id.
+      operationId: getTipoDocumentoInformatizadoPorIdTipoDocumentoInformatizado
+      parameters:
+      - name: idTipoDocumentoInformatizado
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idDocInformatizado:
+                    format: int32
+                    type: integer
+                  nombre:
+                    type: string
+                  codigo:
+                    type: string
+                  observaciones:
+                    type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/tipos-documentos-universales:
+    get:
+      tags:
+      - Tipo Documento Universal
+      summary: Recupera un listado tipo documentos universales pertenecientes a los
+        ids de paises pasados.
+      operationId: getTipoDocumentosUniversales
+      parameters:
+      - name: idPais
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TipoDocumentoUniversalDtoResponseListado"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+    post:
+      tags:
+      - Tipo Documento Universal
+      summary: Inserta un tipo de documento universal junto al listado de sus criterios
+        de validación.
+      operationId: postTipoDocumentoUniversal
+      parameters:
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TipoDocumentoUniversalDtoRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionDtoResponse"
+        "404":
+          description: Not found
+        "403":
+          description: |-
+            - COM_0010: Ha ocurrido un error al validar los valores de los enumerados
+             - COM_0011: Actualmente no se permite crear un tipo de documento universal que no sea para España
+        "401":
+          description: Unauthorized
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/tipos-documentos-universales/{idTipoDocumentoUniversal}:
+    get:
+      tags:
+      - Tipo Documento Universal
+      summary: Recupera un tipo documento universal según el id pasado.
+      operationId: getTipoDocumentoUniversalPorIdTipoDocumentoUniversal
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoDocumentoUniversalDtoResponse"
+        "404":
+          description: Not found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+    put:
+      tags:
+      - Tipo Documento Universal
+      summary: "Actualiza tanto la información general de un tipo de documento universal,\
+        \ como sus criterios de validación."
+      operationId: putTipoDocumentoUniversalPorIdTipoDocumentoUniversal
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TipoDocumentoUniversalDtoRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoDocumentoUniversalDtoResponse"
+        "404":
+          description: Not found
+        "403":
+          description: |-
+            - COM_0010: Ha ocurrido un error al validar los valores de los enumerados
+             - COM_0011: Actualmente no se permite crear un tipo de documento universal que no sea para España
+        "401":
+          description: Unauthorized
+        "400":
+          description: Bad Request
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+    delete:
+      tags:
+      - Tipo Documento Universal
+      summary: Elimina un tipo de documento universal.
+      operationId: deleteTipoDocumentoUniversalPorIdTipoDocumentoUniversal
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoDocumentoUniversalDtoResponse"
+        "404":
+          description: Not found
+        "403":
+          description: "COM_0016: No se puede eliminar un tipo de documento universal\
+            \ que está en uso"
+        "401":
+          description: Unauthorized
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+  /comun/v1/tipos-documentos-universales/{idTipoDocumentoUniversal}/aumentar-usos:
+    post:
+      tags:
+      - Tipo Documento Universal
+      summary: Aumenta en 1 el número de usos del tipo de documento universal.
+      operationId: postAumentarUsosTipoDocumentoUniversalPorIdTipoDocumentoUniversal
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  aplicableA:
+                    $ref: "#/components/schemas/AplicableAEnum"
+                  departamentoArea:
+                    $ref: "#/components/schemas/DepartamentoAreaEnum"
+                  tipo:
+                    $ref: "#/components/schemas/TipoDocumentoPrlEnum"
+                  validez:
+                    format: int32
+                    type: integer
+                  unidadTiempoValidez:
+                    $ref: "#/components/schemas/UnidadTiempoValidezEnum"
+                  especificidad:
+                    $ref: "#/components/schemas/EspecificidadEnum"
+                  idPais:
+                    format: int32
+                    type: integer
+                  codigoMetabuzon:
+                    type: string
+                  indefinido:
+                    type: boolean
+                  diasPreaviso:
+                    format: int32
+                    type: integer
+                  firmaRequerida:
+                    type: boolean
+                  adjuntoObligatorio:
+                    type: boolean
+                  idTipoDocumentoInformatizado:
+                    format: int32
+                    type: integer
+                  idTipoDocumentoUniversal:
+                    format: int32
+                    type: integer
+                  criteriosValidacionUltimaVersion:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CriterioEstandarDtoResponse"
+                  versiones:
+                    type: array
+                    items:
+                      format: int32
+                      type: integer
+                  fechaUltimaVersion:
+                    $ref: "#/components/schemas/ZonedDateTime"
+                  usuarioUltimaVersion:
+                    type: string
+                  enUso:
+                    type: boolean
+        "404":
+          description: Not found
+  /comun/v1/tipos-documentos-universales/{idTipoDocumentoUniversal}/disminuir-usos:
+    post:
+      tags:
+      - Tipo Documento Universal
+      summary: "Disminuye en 1 el número de usos del tipo de documento universal hasta\
+        \ un mínimo de 0 usos. Si se llama al endpoint cuando el tipo de documento\
+        \ universal ya tiene 0 usos, no se realiza ningún cambio."
+      operationId: postDisminuirUsosTipoDocumentoUniversalPorIdTipoDocumentoUniversal
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoDocumentoUniversalDtoResponse"
+        "404":
+          description: Not found
+  /comun/v1/tipos-documentos-universales/{idTipoDocumentoUniversal}/versiones/{version}:
+    get:
+      tags:
+      - Tipo Documento Universal
+      summary: Devuelve la información de una versión específica de un tipo de documento
+        universal además de sus criterios de validación.
+      operationId: getVersionPorIdTipoDocumentoUniversalPorVersion
+      parameters:
+      - name: idTipoDocumentoUniversal
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: version
+        in: path
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - name: X-Timezone
+        in: header
+        description: Zona horaria desde la que se hace la petición
+        required: true
+        schema:
+          default: Europe/Madrid
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionDtoResponse"
+        "404":
+          description: Not Found
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - jwt: []
+      x-roles:
+      - administrador
+      - no_administrador
+      x-permisos: false
+components:
+  schemas:
+    AplicableAEnum:
+      enum:
+      - EMPRESA
+      - EMPLEADO
+      - RECURSO
+      type: string
+    ArchivoDTO_GET:
+      required:
+      - idTipoEntidad
+      - idEntidad
+      - observaciones
+      - nombre
+      - binario
+      type: object
+      properties:
+        idTipoEntidad:
+          format: int32
+          pattern: "^\\d{1,11}$"
+          type: integer
+        idEntidad:
+          format: int32
+          pattern: "^\\d{1,11}$"
+          type: integer
+        idTipoEntidadSecundaria:
+          format: int32
+          pattern: "^\\d{1,11}$"
+          type: integer
+        idEntidadSecundaria:
+          format: int32
+          pattern: "^\\d{1,11}$"
+          type: integer
+        observaciones:
+          maxLength: 4096
+          type: string
+        nombre:
+          maxLength: 64
+          type: string
+        binario:
+          format: binary
+          type: string
+        esCreacion:
+          type: boolean
+        extension:
+          type: string
+        numeroPaginas:
+          format: int32
+          type: integer
+        idArchivo:
+          format: int32
+          type: integer
+        uuid:
+          type: string
+        idEntorno:
+          format: int32
+          type: integer
+        fechaInsercion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        fechaModificacion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        tamano:
+          format: int32
+          type: integer
+    ArchivoDTO_GET_INFO:
+      type: object
+      properties:
+        existe:
+          type: boolean
+        uuid:
+          type: string
+        fechaInsercion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        fechaModificacion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        tamano:
+          format: int32
+          type: integer
+        extension:
+          type: string
+        nombre:
+          type: string
+        observaciones:
+          type: string
+        idArchivo:
+          format: int32
+          type: integer
+        numeroPaginas:
+          format: int32
+          type: integer
+    AutonomoDtoRequestUpdate:
+      required:
+      - apellido1
+      - apellido2
+      type: object
+      properties:
+        nombre:
+          maxLength: 255
+          type: string
+        apellido1:
+          type: string
+        apellido2:
+          type: string
+        nombreComercial:
+          type: string
+        observaciones:
+          maxLength: 4096
+          type: string
+    AutonomoDtoResponse:
+      required:
+      - cif
+      - paisCif
+      - observaciones
+      type: object
+      properties:
+        idEmpresa:
+          format: int32
+          type: integer
+        nombre:
+          type: string
+        apellido1:
+          type: string
+        apellido2:
+          type: string
+        cif:
+          type: string
+        paisCif:
+          format: int32
+          type: integer
+        fechaCreacion:
+          type: string
+        fechaUltimoAcceso:
+          type: string
+        observaciones:
+          type: string
+        nombreComercial:
+          type: string
+    CategoriaRecursoMaterialDTO_GET:
+      required:
+      - nombre
+      - observaciones
+      - idPais
+      - idCategoria
+      type: object
+      properties:
+        nombre:
+          maxLength: 45
+          type: string
+        observaciones:
+          maxLength: 4096
+          type: string
+        idPais:
+          format: int32
+          type: integer
+        idCategoria:
+          format: int32
+          type: integer
+    CriterioEstandarDtoResponse:
+      type: object
+      properties:
+        idCriterioEstandar:
+          format: int32
+          type: integer
+        nombre:
+          type: string
+        criterio:
+          type: string
+        mensajeRechazo:
+          type: string
+        soloUsuariosInternos:
+          type: boolean
+    DayOfWeek:
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+      type: string
+    DepartamentoAreaEnum:
+      enum:
+      - PRL
+      - ADMINISTRACION
+      - OTROS
+      type: string
+    Duration:
+      format: duration
+      type: string
+      example: P1D
+    EmpresaDtoRequestUpdate:
+      type: object
+      properties:
+        nombre:
+          maxLength: 255
+          type: string
+        observaciones:
+          maxLength: 4096
+          type: string
+    EmpresaDtoResponse:
+      required:
+      - cif
+      - nombre
+      - paisCif
+      - observaciones
+      type: object
+      properties:
+        cif:
+          maxLength: 25
+          minLength: 3
+          type: string
+        nombre:
+          maxLength: 255
+          minLength: 3
+          type: string
+        paisCif:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        observaciones:
+          maxLength: 4096
+          type: string
+        idEmpresa:
+          format: int32
+          type: integer
+        nombreUsuario:
+          type: string
+        apellidosUsuario:
+          type: string
+        emailUsuario:
+          type: string
+        tipoEmpresa:
+          $ref: "#/components/schemas/TipoSolicitudAltaEnum"
+        entornos:
+          type: array
+          items:
+            $ref: "#/components/schemas/EntornoDtoResponse"
+        fechaCreacion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        fechaUltimoAcceso:
+          $ref: "#/components/schemas/ZonedDateTime"
+        razonSocial:
+          type: string
+        zonaHoraria:
+          $ref: "#/components/schemas/ZoneId"
+    EntornoDtoResponse:
+      type: object
+      properties:
+        idEntorno:
+          format: int32
+          type: integer
+        idModulo:
+          format: int32
+          type: integer
+        activo:
+          type: boolean
+        estado:
+          $ref: "#/components/schemas/EntornoEstadoEnum"
+    EntornoEstadoEnum:
+      enum:
+      - CREADO
+      - PENDIENTE
+      - BORRANDO
+      type: string
+    EspecificidadEnum:
+      enum:
+      - GENERICO
+      - ESPECIFICO
+      type: string
+    FormatoEnum:
+      enum:
+      - CROP_CENTRADO
+      - REESCALADO
+      - REESCALADO_ALTO
+      - REESCALADO_ANCHO
+      type: string
+    IdiomaDtoResponse:
+      type: object
+      properties:
+        idIdioma:
+          format: int32
+          type: integer
+        nombre:
+          type: string
+        codigo:
+          type: string
+    Instant:
+      format: date-time
+      type: string
+      example: 2022-03-10T16:15:50Z
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: 2022-03-10T12:15:50
+    LocalTime:
+      format: local-time
+      type: string
+      externalDocs:
+        description: As defined by 'partial-time' in RFC3339
+        url: https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6
+      example: 13:45:30.123456789
+    ModuloEnum:
+      enum:
+      - ESTRUCTURA
+      - CAE
+      - CA
+      - FORMULARIOS
+      - METAMARKET
+      - MQL
+      - TAREAS
+      - PROVEEDORES
+      type: string
+    Month:
+      enum:
+      - JANUARY
+      - FEBRUARY
+      - MARCH
+      - APRIL
+      - MAY
+      - JUNE
+      - JULY
+      - AUGUST
+      - SEPTEMBER
+      - OCTOBER
+      - NOVEMBER
+      - DECEMBER
+      type: string
+    PersonaDTO_GET:
+      required:
+      - dni
+      - nombre
+      - apellido1
+      - apellido2
+      - tipoDocId
+      - idPaisDni
+      type: object
+      properties:
+        dni:
+          maxLength: 45
+          minLength: 3
+          type: string
+        nombre:
+          maxLength: 128
+          minLength: 3
+          type: string
+        apellido1:
+          maxLength: 128
+          minLength: 3
+          type: string
+        apellido2:
+          maxLength: 128
+          type: string
+        tipoDocId:
+          maxLength: 45
+          minLength: 3
+          type: string
+        idPaisDni:
+          format: int32
+          type: integer
+        idPersona:
+          format: int32
+          type: integer
+    PersonaDTO_POST_PUT:
+      required:
+      - dni
+      - nombre
+      - apellido1
+      - apellido2
+      - tipoDocId
+      - idPaisDni
+      type: object
+      properties:
+        dni:
+          maxLength: 45
+          minLength: 3
+          type: string
+        nombre:
+          maxLength: 128
+          minLength: 3
+          type: string
+        apellido1:
+          maxLength: 128
+          minLength: 3
+          type: string
+        apellido2:
+          maxLength: 128
+          type: string
+        tipoDocId:
+          maxLength: 45
+          minLength: 3
+          type: string
+        idPaisDni:
+          format: int32
+          type: integer
+    TimeDefinition:
+      enum:
+      - UTC
+      - WALL
+      - STANDARD
+      type: string
+    TipoDocumentoInformatizadoDtoResponse:
+      type: object
+      properties:
+        idDocInformatizado:
+          format: int32
+          type: integer
+        nombre:
+          type: string
+        codigo:
+          type: string
+        observaciones:
+          type: string
+    TipoDocumentoPrlEnum:
+      enum:
+      - FORMACIONES
+      - INFORMACIONES
+      - EPI
+      - RECONOCIMIENTO_MEDICO
+      - OTROS
+      type: string
+    TipoDocumentoUniversalDtoRequest:
+      required:
+      - nombre
+      - aplicableA
+      - departamentoArea
+      - especificidad
+      - idPais
+      type: object
+      properties:
+        nombre:
+          maxLength: 255
+          type: string
+        aplicableA:
+          $ref: "#/components/schemas/AplicableAEnum"
+        departamentoArea:
+          $ref: "#/components/schemas/DepartamentoAreaEnum"
+        especificidad:
+          $ref: "#/components/schemas/EspecificidadEnum"
+        idPais:
+          format: int32
+          type: integer
+        tipo:
+          $ref: "#/components/schemas/TipoDocumentoPrlEnum"
+        validez:
+          format: int32
+          type: integer
+        unidadTiempoValidez:
+          $ref: "#/components/schemas/UnidadTiempoValidezEnum"
+        codigoMetabuzon:
+          maxLength: 32
+          type: string
+        indefinido:
+          type: boolean
+        diasPreaviso:
+          format: int32
+          type: integer
+        firmaRequerida:
+          type: boolean
+        adjuntoObligatorio:
+          type: boolean
+        criteriosValidacion:
+          type: array
+          items:
+            format: int32
+            type: integer
+        idTipoDocumentoInformatizado:
+          format: int32
+          type: integer
+    TipoDocumentoUniversalDtoResponse:
+      type: object
+      properties:
+        nombre:
+          type: string
+        aplicableA:
+          $ref: "#/components/schemas/AplicableAEnum"
+        departamentoArea:
+          $ref: "#/components/schemas/DepartamentoAreaEnum"
+        tipo:
+          $ref: "#/components/schemas/TipoDocumentoPrlEnum"
+        validez:
+          format: int32
+          type: integer
+        unidadTiempoValidez:
+          $ref: "#/components/schemas/UnidadTiempoValidezEnum"
+        especificidad:
+          $ref: "#/components/schemas/EspecificidadEnum"
+        idPais:
+          format: int32
+          type: integer
+        codigoMetabuzon:
+          type: string
+        indefinido:
+          type: boolean
+        diasPreaviso:
+          format: int32
+          type: integer
+        firmaRequerida:
+          type: boolean
+        adjuntoObligatorio:
+          type: boolean
+        idTipoDocumentoInformatizado:
+          format: int32
+          type: integer
+        idTipoDocumentoUniversal:
+          format: int32
+          type: integer
+        criteriosValidacionUltimaVersion:
+          type: array
+          items:
+            $ref: "#/components/schemas/CriterioEstandarDtoResponse"
+        versiones:
+          type: array
+          items:
+            format: int32
+            type: integer
+        fechaUltimaVersion:
+          $ref: "#/components/schemas/ZonedDateTime"
+        usuarioUltimaVersion:
+          type: string
+        enUso:
+          type: boolean
+    TipoDocumentoUniversalDtoResponseListado:
+      type: object
+      properties:
+        idTipoDocumentoUniversal:
+          format: int32
+          type: integer
+        nombre:
+          type: string
+        aplicableA:
+          $ref: "#/components/schemas/AplicableAEnum"
+        departamentoArea:
+          $ref: "#/components/schemas/DepartamentoAreaEnum"
+        tipo:
+          $ref: "#/components/schemas/TipoDocumentoPrlEnum"
+        validez:
+          format: int32
+          type: integer
+        unidadTiempoValidez:
+          $ref: "#/components/schemas/UnidadTiempoValidezEnum"
+        especificidad:
+          $ref: "#/components/schemas/EspecificidadEnum"
+        enUso:
+          type: boolean
+        idPais:
+          format: int32
+          type: integer
+        indefinido:
+          type: boolean
+    TipoRecursoMaterialDTO_GET:
+      required:
+      - nombre
+      - observaciones
+      - idTipoRecursoMaterial
+      type: object
+      properties:
+        nombre:
+          maxLength: 256
+          type: string
+        observaciones:
+          maxLength: 4096
+          type: string
+        idTipoRecursoMaterial:
+          format: int32
+          type: integer
+    TipoSolicitudAltaEnum:
+      enum:
+      - EMPRESA
+      - AUTONOMO
+      type: string
+    UnidadTiempoValidezEnum:
+      enum:
+      - ANOS
+      - MESES
+      - DIAS
+      type: string
+    VersionDtoResponse:
+      type: object
+      properties:
+        idVersionCriterios:
+          format: int32
+          type: integer
+        version:
+          format: int32
+          type: integer
+        criteriosValidacion:
+          type: array
+          items:
+            $ref: "#/components/schemas/CriterioEstandarDtoResponse"
+        fechaEdicion:
+          type: string
+        usuarioEdicion:
+          type: string
+    ZoneId:
+      type: object
+      properties:
+        id:
+          type: string
+        rules:
+          $ref: "#/components/schemas/ZoneRules"
+    ZoneOffset:
+      type: object
+      properties:
+        totalSeconds:
+          format: int32
+          type: integer
+        rules:
+          $ref: "#/components/schemas/ZoneRules"
+    ZoneOffsetTransition:
+      type: object
+      properties:
+        epochSecond:
+          format: int64
+          type: integer
+        transition:
+          $ref: "#/components/schemas/LocalDateTime"
+        offsetBefore:
+          $ref: "#/components/schemas/ZoneOffset"
+        offsetAfter:
+          $ref: "#/components/schemas/ZoneOffset"
+        instant:
+          $ref: "#/components/schemas/Instant"
+        dateTimeBefore:
+          $ref: "#/components/schemas/LocalDateTime"
+        dateTimeAfter:
+          $ref: "#/components/schemas/LocalDateTime"
+        duration:
+          $ref: "#/components/schemas/Duration"
+        durationSeconds:
+          format: int32
+          type: integer
+        gap:
+          type: boolean
+        overlap:
+          type: boolean
+        validOffsets:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffset"
+    ZoneOffsetTransitionRule:
+      type: object
+      properties:
+        month:
+          $ref: "#/components/schemas/Month"
+        dom:
+          format: byte
+          type: string
+        dow:
+          $ref: "#/components/schemas/DayOfWeek"
+        time:
+          $ref: "#/components/schemas/LocalTime"
+        timeEndOfDay:
+          type: boolean
+        timeDefinition:
+          $ref: "#/components/schemas/TimeDefinition"
+        standardOffset:
+          $ref: "#/components/schemas/ZoneOffset"
+        offsetBefore:
+          $ref: "#/components/schemas/ZoneOffset"
+        offsetAfter:
+          $ref: "#/components/schemas/ZoneOffset"
+        dayOfMonthIndicator:
+          format: int32
+          type: integer
+        dayOfWeek:
+          $ref: "#/components/schemas/DayOfWeek"
+        localTime:
+          $ref: "#/components/schemas/LocalTime"
+        midnightEndOfDay:
+          type: boolean
+    ZoneRules:
+      type: object
+      properties:
+        standardTransitions:
+          type: array
+          items:
+            format: int64
+            type: integer
+        standardOffsets:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffset"
+        savingsInstantTransitions:
+          type: array
+          items:
+            format: int64
+            type: integer
+        savingsLocalTransitions:
+          type: array
+          items:
+            $ref: "#/components/schemas/LocalDateTime"
+        wallOffsets:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffset"
+        lastRules:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffsetTransitionRule"
+        fixedOffset:
+          type: boolean
+        transitions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffsetTransition"
+        transitionRules:
+          type: array
+          items:
+            $ref: "#/components/schemas/ZoneOffsetTransitionRule"
+    ZonedDateTime:
+      format: date-time
+      type: string
+      example: 2022-03-10T12:15:50-04:00
+  securitySchemes:
+    jwt:
+      type: http
+      description: Authentication
+      scheme: bearer
+      bearerFormat: JWT
