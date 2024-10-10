@@ -3,7 +3,7 @@
  * Do not make direct changes to the file.
  */
 
-export type paths = {
+export interface paths {
     "/comun/v1/autonomos/{idEmpresa}": {
         parameters: {
             query?: never;
@@ -448,9 +448,9 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
-};
+}
 export type webhooks = Record<string, never>;
-export type components = {
+export interface components {
     schemas: {
         /** @enum {string} */
         AplicableAEnum: AplicableAEnum;
@@ -781,7 +781,7 @@ export type components = {
     requestBodies: never;
     headers: never;
     pathItems: never;
-};
+}
 export type SchemaAplicableAEnum = components['schemas']['AplicableAEnum'];
 export type SchemaArchivoDtoGet = components['schemas']['ArchivoDTO_GET'];
 export type SchemaArchivoDtoGetInfo = components['schemas']['ArchivoDTO_GET_INFO'];

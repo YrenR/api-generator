@@ -3,7 +3,7 @@
  * Do not make direct changes to the file.
  */
 
-export type paths = {
+export interface paths {
     "/cae/v1/actividades": {
         parameters: {
             query?: never;
@@ -3767,9 +3767,9 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
-};
+}
 export type webhooks = Record<string, never>;
-export type components = {
+export interface components {
     schemas: {
         /** @enum {string} */
         AccionEntregaEpiEnum: AccionEntregaEpiEnum;
@@ -6594,7 +6594,7 @@ export type components = {
     requestBodies: never;
     headers: never;
     pathItems: never;
-};
+}
 export type SchemaAccionEntregaEpiEnum = components['schemas']['AccionEntregaEpiEnum'];
 export type SchemaAceptarRechazarReconocimientoDtoRequest = components['schemas']['AceptarRechazarReconocimientoDtoRequest'];
 export type SchemaActividadAdjuntosInfoDtoResponse = components['schemas']['ActividadAdjuntosInfoDtoResponse'];
