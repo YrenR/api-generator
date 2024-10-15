@@ -1,10 +1,4 @@
-// Copyright © - Metadata S.L. - Todos los Derechos Reservados - Documento Confidencial [CON]
-// import { ETipoEntidadArchivos } from "../../enums";
-// import { ImagenDAO } from "../../modelo";
 import { AxiosSingleton_API_ESTRUCTURA } from "./AxiosSingleton_API_ESTRUCTURA";
-
-const ENDPOINT = "imagen";
-
 
 // export const createLogoEntidadEstructura = (file: File, idTipoEntidad: any, idEntidad: number) => {
 //   let formData = new FormData();

@@ -1,4 +1,3 @@
-// Copyright © - Metadata S.L. - Todos los Derechos Reservados - Documento Confidencial [CON]
 import * as AxiosInstances from "../api-constructors";
 import { AxiosSingleton_API_COMUN } from "../../services/serivces/comun/AxiosSingleton_API_COMUN";
 import { AxiosSingleton_API_COMUN_PUBLIC } from "../../services/serivces/comun/AxiosSingleton_API_COMUN_PUBLIC";

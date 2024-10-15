@@ -3561,7 +3561,7 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["UgDTO_PUT"];
             };
@@ -3896,7 +3896,7 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["RequestBodyDobleListaInteger"];
             };
@@ -5086,8 +5086,8 @@ export interface operations {
     };
     getEstadoAltaPorIdEmpresaPorIdEmpleado: {
         parameters: {
-            query: {
-                idEmpresaUgUt: number;
+            query?: {
+                idEmpresaUgUt?: number;
                 idsUg?: number[];
                 idsUt?: number[];
             };
@@ -5111,13 +5111,6 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["EstadoAltaDtoResponse"];
                 };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
             };
             /** @description Unauthorized */
             401: {

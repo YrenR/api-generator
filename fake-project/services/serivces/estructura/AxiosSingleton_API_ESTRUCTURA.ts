@@ -1,4 +1,3 @@
-// Copyright © - Metadata S.L. - Todos los Derechos Reservados - Documento Confidencial [CON]
 // import { AxiosInstance } from "axios";
 
 import { OpenApiAxios } from "@web-bee-ru/openapi-axios";

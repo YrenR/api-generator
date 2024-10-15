@@ -1,13 +1,16 @@
 apis:
   comun@v1:
-    root: http://localhost:9080/q/openapi.yaml
+    root: ./openapi_comun.yaml
+    # root: http://localhost:9080/q/openapi.yaml
     x-openapi-ts:
       output: ./repositories/comun-v1.ts
   cae@v1:
-    root: http://localhost:9083/q/openapi.yaml
+    root: openapi_cae.yaml
+    # root: http://localhost:9083/q/openapi.yaml
     x-openapi-ts:
       output: ./repositories/cae-v1.ts
   estructura@v1:
-    root: http://localhost:9082/q/openapi.yaml
+    root: ./openapi_estructura.yaml
+    # root: http://localhost:9082/q/openapi.yaml
     x-openapi-ts:
       output: ./repositories/estructura-v1.ts

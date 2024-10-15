@@ -1,4 +1,4 @@
-// Copyright © - Metadata S.L. - Todos los Derechos Reservados - Documento Confidencial [CON]
+import { estructuraRepository } from "../../../../repositories";
 import { AxiosSingleton_API_ESTRUCTURA } from "./AxiosSingleton_API_ESTRUCTURA";
 
 /**
@@ -8,24 +8,16 @@ import { AxiosSingleton_API_ESTRUCTURA } from "./AxiosSingleton_API_ESTRUCTURA";
  */
 export const getAllUgs = (
   idEmpresa: number,
-  opt?: {
-    idTipoUg?: number;
-    idUgPadre?: number;
-    listaIds?: number[];
-    modoArbol?: boolean;
-    nivel?: number;
-    obtenerInterna?: boolean;
-    idTipoEstructura?: number;
-  },
+  query?: estructuraRepository.operations["getUgsPorIdEmpresa"]["parameters"]["query"],
 ) => {
   return AxiosSingleton_API_ESTRUCTURA.getInstance()
-    .get("/estructura/v1/empresas-principales/{idEmpresa}/ugs", { params: { idEmpresa }, query: opt })
+    .get("/estructura/v1/empresas-principales/{idEmpresa}/ugs", { params: { idEmpresa }, query })
     .then(({ data }) => data);
 };
 
-export const deleteUg = (idEmpresaPrincipal: number, idUg: number) => {
+export const deleteUg = (idEmpresa: number, idUg: number) => {
   return AxiosSingleton_API_ESTRUCTURA.getInstance()
-    .delete("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}", { params: { idEmpresa: idEmpresaPrincipal, idUg } })
+    .delete("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}", { params: { idEmpresa, idUg } })
     .then(() => "UgService.deleteUg() -> Done");
 };
 
@@ -36,22 +28,18 @@ export const deleteUg = (idEmpresaPrincipal: number, idUg: number) => {
  * @param utChecked as Number[], arrays de idUt
  * @param utUnchecked as Number[], arrays de idUt
  */
-// TODO: !!BORRAR!!  // TODO: !!BORRAR!!  // TODO: !!BORRAR!!  // TODO: !!BORRAR!!  // TODO: !!BORRAR!!  // TODO: !!BORRAR!! 
 export const saveUgRelUtsByIds = (
   idEmpresa: number,
   idUg: number,
-  listaUTs: {
-    listadoEliminar: number[];
-    listadoInsertar: number[];
-  },
+  listaUTs: estructuraRepository.SchemaRequestBodyDobleListaInteger,
 ) => {
   return AxiosSingleton_API_ESTRUCTURA.getInstance()
-    .post("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}/uts", undefined, { params: { idEmpresa, idUg } })
+    .post("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}/uts", listaUTs, { params: { idEmpresa, idUg } })
     .then(({ data }) => data,);
 };
 
-export const updateUgSinRelaciones = (idEmpresaPrincipal: number, idUg: number, ugData: any) => {
+export const updateUgSinRelaciones = (idEmpresaPrincipal: number, idUg: number, ugData: estructuraRepository.SchemaUgDtoPut) => {
   return AxiosSingleton_API_ESTRUCTURA.getInstance()
-    .put("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}", undefined, { params: { idEmpresa: idEmpresaPrincipal, idUg } })
+    .put("/estructura/v1/empresas-principales/{idEmpresa}/ugs/{idUg}", ugData, { params: { idEmpresa: idEmpresaPrincipal, idUg } })
     .then(({ data }) => data);
 };

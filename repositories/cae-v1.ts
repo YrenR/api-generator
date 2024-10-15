@@ -231,6 +231,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/cae/v1/criterios-validacion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Obtener todos los Criterios de Validación */
+        get: operations["getCriteriosValidacion"];
+        put?: never;
+        /** Crear Criterio de Validación */
+        post: operations["postCriterioValidacion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/cae/v1/criterios-validacion/{idCriterioValidacion}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Obtener Criterio de Validación por ID */
+        get: operations["getCriterioValidacionPorIdCriterioValidacion"];
+        /** Modifica un Criterio de Validación */
+        put: operations["putCriterioValidacionPorIdCriterioValidacion"];
+        post?: never;
+        /** Borra un Criterio de Validación */
+        delete: operations["deleteCriterioValidacionPorIdCriterioValidacion"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/cae/v1/documentos-relevantes/recalcular": {
         parameters: {
             query?: never;
@@ -1995,6 +2032,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/cae/v1/evaluaciones-riesgos/{idEvaluacion}/adjuntos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Subir un archivo a una evaluación */
+        post: operations["postAdjuntoPorIdEvaluacion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/cae/v1/evaluaciones-riesgos/{idEvaluacion}/adjuntos/informacion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Obtener la información de los adjuntos de una evaluación */
+        get: operations["getInformacionAdjuntoPorIdEvaluacion"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/cae/v1/evaluaciones-riesgos/{idEvaluacion}/riesgos": {
         parameters: {
             query?: never;
@@ -2488,40 +2559,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/cae/v1/informes-evaluacion/{idInformeEvaluacion}/evaluadores": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Obtiene evaluadores de un informe evaluación */
-        get: operations["getEvaluadoresInformeEvaluacion"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cae/v1/informes-evaluacion/{idInformeEvaluacion}/evaluadores/{idUsuarioEvaluador}/firmar-evaluador": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Firma un InformeEvaluacion */
-        post: operations["postFirmarInformeEvaluacionEvaluador"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/cae/v1/informes-evaluacion/{idInformeEvaluacion}/generar": {
         parameters: {
             query?: never;
@@ -2533,23 +2570,6 @@ export interface paths {
         put?: never;
         /** Generar un informe de evaluación */
         post: operations["generarInformeEvaluacion"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cae/v1/informes-evaluacion/{idInformeEvaluacion}/generar-pdfs-evaluadores": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Genera un informe de evaluacion parcial */
-        post: operations["generarInformeEvaluacionParcial"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3115,6 +3135,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/cae/v1/tipos-documentos-universales": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Devuelve todos los tipos de documentos universales del sistema en base a unos filtros */
+        get: operations["getTiposDocumentosUniversales"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/cae/v1/tipos-documentos/firmar": {
         parameters: {
             query?: never;
@@ -3162,6 +3199,24 @@ export interface paths {
         get: operations["getAdjuntoPorIdTipoDocumentoPorUuid"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/cae/v1/tipos-documentos/{idTipoDocumento}/criterios-validacion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Obtiene una lista de criterios de validación relacionados con un tipo de documento */
+        get: operations["getCriteriosValidacionPorIdTipoDocumento"];
+        put?: never;
+        /** Insertar, eliminar y modificar relaciones entre Tipo de Documento y Criterios de Validación */
+        post: operations["postCriteriosValidacionPorIdTipoDocumento"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3333,23 +3388,6 @@ export interface paths {
         put?: never;
         /** Inserta un adjunto a un solicitante de un tipo de documento */
         post: operations["postSolicitantePorIdTipoDocumentoPorIdTipoSolicitantePorIdSolicitante"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cae/v1/tipos-documentos/{idTipoDocumento}/versiones/{version}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Devuelve la información de una versión específica de un tipo de documento además de sus criterios de validación. */
-        get: operations["getVersionPorIdTipoDocumentoPorVersion"];
-        put?: never;
-        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3875,8 +3913,6 @@ export interface components {
         };
         /** @enum {string} */
         AplicableAEnum: AplicableAEnum;
-        /** @enum {string} */
-        AplicableAEnum1: AplicableAEnum1;
         ArchivoDTO_GET: {
             /** Format: int32 */
             idTipoEntidad: number;
@@ -3980,38 +4016,18 @@ export interface components {
             fechaAviso: string;
             empleados: components["schemas"]["EmpleadoDTO_POST_PUT"][];
         };
-        CriterioEstandarDtoResponse: {
-            /** Format: int32 */
-            idCriterioEstandar?: number;
-            nombre?: string;
-            criterio?: string;
-            mensajeRechazo?: string;
-            soloUsuariosInternos?: boolean;
-        };
         CriterioValidacionDtoRequest: {
-            /** Format: int32 */
-            idCriterioEstandar?: number;
-            nombre?: string;
-            criterio: string;
-            mensajeRechazo: string;
-            soloUsuariosInternos: boolean;
+            textoCriterioValidacion: string;
         };
         CriterioValidacionDtoResponse: {
             /** Format: int32 */
             idCriterioValidacion?: number;
-            /** Format: int32 */
-            idCriterioEstandar?: number;
-            nombre?: string;
-            criterio?: string;
-            mensajeRechazo?: string;
-            soloUsuariosInternos?: boolean;
+            textoCriterioValidacion?: string;
         };
         /** @enum {string} */
         DayOfWeek: DayOfWeek;
         /** @enum {string} */
         DepartamentoAreaEnum: DepartamentoAreaEnum;
-        /** @enum {string} */
-        DepartamentoAreaEnum1: DepartamentoAreaEnum1;
         /** @enum {string} */
         DocumEstadoEnum: DocumEstadoEnum;
         /** @enum {string} */
@@ -4391,11 +4407,7 @@ export interface components {
         /** @enum {string} */
         EspecificidadEnum: EspecificidadEnum;
         /** @enum {string} */
-        EspecificidadEnum1: EspecificidadEnum1;
-        /** @enum {string} */
         EstadoEpiEnum: EstadoEpiEnum;
-        /** @enum {string} */
-        EstadoFirmaEvaluadorEnum: EstadoFirmaEvaluadorEnum;
         /** @enum {string} */
         EstadoFormacionEnum: EstadoFormacionEnum;
         /** @enum {string} */
@@ -4410,8 +4422,6 @@ export interface components {
         EstadoInformacionDtoResponse: {
             estado?: components["schemas"]["EstadoGestionInformacionEnum"];
         };
-        /** @enum {string} */
-        EstadoInformeEvaluacionEnum: EstadoInformeEvaluacionEnum;
         EvaluacionActividadDtoRequest: {
             fecha: string;
             /** Format: int32 */
@@ -4466,24 +4476,6 @@ export interface components {
             tipo?: components["schemas"]["TipoEvaluacionEnum"];
             /** Format: int32 */
             idEvaluacion?: number;
-        };
-        EvaluadorDto: {
-            /** Format: int32 */
-            idUsuarioEvaluador?: number;
-            /** Format: int32 */
-            idInforme?: number;
-            nombre?: string;
-            dni?: string;
-        };
-        EvaluadorFirmaResponse: {
-            estado?: components["schemas"]["EstadoFirmaEvaluadorEnum"];
-            /** Format: int32 */
-            idEvaluador?: number;
-            nombre?: string;
-            /** Format: int32 */
-            numElementosEvaluados?: number;
-            uuidFirmado?: string;
-            uuidPlantilla?: string;
         };
         FilaTablaRiesgoDtoResponse: {
             columnas?: components["schemas"]["ColumnaTablaRiesgoDtoResponse"][];
@@ -4609,7 +4601,6 @@ export interface components {
             nombre?: string;
             /** Format: int32 */
             idEmpresa?: number;
-            visible?: boolean;
         };
         /** @enum {string} */
         InformeEnum: InformeEnum;
@@ -4625,8 +4616,6 @@ export interface components {
             /** Format: int32 */
             idInformeEvaluacion?: number;
             nombre?: string;
-            estado?: components["schemas"]["EstadoInformeEvaluacionEnum"];
-            firmantes?: components["schemas"]["EvaluadorDto"][];
             incluyeEmpleados?: boolean;
         };
         InformeEvaluacionesModificadasDtoResponse: {
@@ -5498,6 +5487,34 @@ export interface components {
             idTipoDocumento: number;
             nombre: string;
         };
+        TipoDocumentoCriterioDto: {
+            /** Format: int32 */
+            idTipoDocumentoCriterioValidacion: number;
+            textoCriterioValidacion: string;
+            visibleUsuarioInterno: boolean;
+        };
+        TipoDocumentoCriterioDtoPost: {
+            textoCriterioValidacion: string;
+            visibleUsuarioInterno: boolean;
+        };
+        TipoDocumentoCriterioDtoResponse: {
+            /** Format: int32 */
+            idTipoDocumentoCriterioValidacion?: number;
+            textoCriterioValidacion?: string;
+            visibleUsuarioInterno?: boolean;
+        };
+        TipoDocumentoCriterioRequest: {
+            listadoInsertar: components["schemas"]["TipoDocumentoCriterioDtoPost"][];
+            listadoEliminar: number[];
+            listadoEditar: components["schemas"]["TipoDocumentoCriterioDto"][];
+        };
+        TipoDocumentoCriterioResponse: {
+            listadoInsertar: components["schemas"]["TipoDocumentoCriterioDto"][];
+            listadoModificar: components["schemas"]["TipoDocumentoCriterioDto"][];
+            listadoEliminar: components["schemas"]["TipoDocumentoCriterioDto"][];
+            /** Format: int32 */
+            idTipoDocumento?: number;
+        };
         TipoDocumentoDTO_GET: {
             nombre: string;
             tipoDocumentoUniversal?: components["schemas"]["TipoDocumentoUniversalDtoResponse"];
@@ -5524,32 +5541,6 @@ export interface components {
             nombre?: string;
             permiso?: components["schemas"]["PermisoPorDefectoEnum"];
         };
-        TipoDocumentoDtoRabbitGrupoEmpresa: {
-            /** Format: int32 */
-            idTipoDocumento?: number;
-            departamentoArea?: components["schemas"]["DepartamentoAreaEnum1"];
-            tipo?: components["schemas"]["TipoEnum"];
-            tipoDocumentoInformatizado?: components["schemas"]["TipoDocumentoInformatizadoEnum"];
-            nombre?: string;
-            /** Format: int32 */
-            idTipoDocumentoUniversal?: number;
-            adjuntoObligatorio?: boolean;
-            obligatorio?: boolean;
-            aplicableA?: components["schemas"]["AplicableAEnum"];
-            codMetabuzon?: string;
-            indefinido?: boolean;
-            especificidad?: components["schemas"]["EspecificidadEnum"];
-            /** Format: int32 */
-            validez?: number;
-            unidadTiempoValidez?: components["schemas"]["UnidadTiempoEnum"];
-            /** Format: int32 */
-            diasPreaviso?: number;
-            firmaRequerida?: boolean;
-            tiposDocumentoRelacionados?: number[];
-            /** Format: int32 */
-            idUsuario?: number;
-            ultimaVersion?: components["schemas"]["VersionDtoResponse"];
-        };
         TipoDocumentoDtoRequest: {
             adjuntoObligatorio: boolean;
             aplicableA: components["schemas"]["AplicableAEnum"];
@@ -5565,59 +5556,49 @@ export interface components {
             /** Format: int32 */
             diasPreaviso?: number;
             obligatorio: boolean;
-            departamentoArea?: components["schemas"]["DepartamentoAreaEnum1"];
+            departamentoArea?: components["schemas"]["DepartamentoAreaEnum"];
             tipo?: components["schemas"]["TipoEnum"];
             unidadTiempoValidez?: components["schemas"]["UnidadTiempoEnum"];
             tipoDocumentoInformatizado?: components["schemas"]["TipoDocumentoInformatizadoEnum"];
-            criteriosValidacion?: components["schemas"]["CriterioValidacionDtoRequest"][];
         };
         TipoDocumentoDtoResponse: {
             /** Format: int32 */
             idTipoDocumento?: number;
-            nombre?: string;
-            usuarioUltimaVersion?: string;
+            adjuntoObligatorio?: boolean;
             aplicableA?: components["schemas"]["AplicableAEnum"];
-            especificidad?: components["schemas"]["EspecificidadEnum"];
-            departamentoArea?: components["schemas"]["DepartamentoAreaEnum1"];
-            tipo?: components["schemas"]["TipoEnum"];
             codMetabuzon?: string;
             tipoDocumentoUniversal?: components["schemas"]["TipoDocumentoUniversalDtoResponse"];
-            tipoDocumentoInformatizado?: components["schemas"]["TipoDocumentoInformatizadoEnum"];
             indefinido?: boolean;
-            adjuntoObligatorio?: boolean;
+            nombre?: string;
             firmaRequerida?: boolean;
-            requiereRecibi?: boolean;
-            obligatorio?: boolean;
-            enUso?: boolean;
-            esCriteriosUniversales?: boolean;
-            /** Format: int32 */
-            diasPreaviso?: number;
+            especificidad?: components["schemas"]["EspecificidadEnum"];
             /** Format: int32 */
             validez?: number;
+            /** Format: int32 */
+            diasPreaviso?: number;
+            obligatorio?: boolean;
+            departamentoArea?: components["schemas"]["DepartamentoAreaEnum"];
+            tipo?: components["schemas"]["TipoEnum"];
             unidadTiempoValidez?: components["schemas"]["UnidadTiempoEnum"];
-            fechaUltimaVersion?: components["schemas"]["ZonedDateTime"];
+            tipoDocumentoInformatizado?: components["schemas"]["TipoDocumentoInformatizadoEnum"];
             tiposDocumentoRelacionados?: number[];
-            versiones?: number[];
-            criteriosValidacionUltimaVersion?: components["schemas"]["CriterioValidacionDtoResponse"][];
+            criteriosValidacion?: components["schemas"]["TipoDocumentoCriterioDto"][];
         };
         TipoDocumentoDtoResponseList: {
             /** Format: int32 */
             idTipoDocumento?: number;
             nombre?: string;
-            departamentoArea?: components["schemas"]["DepartamentoAreaEnum1"];
+            departamentoArea?: components["schemas"]["DepartamentoAreaEnum"];
             tipo?: components["schemas"]["TipoEnum"];
             /** Format: int32 */
             validez?: number;
             unidadTiempoValidez?: components["schemas"]["UnidadTiempoEnum"];
             especificidad?: components["schemas"]["EspecificidadEnum"];
             obligatorio?: boolean;
-            enUso?: boolean;
             /** Format: int32 */
             diasPreaviso?: number;
             aplicableA?: components["schemas"]["AplicableAEnum"];
-            esTipoDocumentoUniversal?: boolean;
-            esCriteriosUniversales?: boolean;
-            indefinido?: boolean;
+            tipoDocumentoInformatizado?: components["schemas"]["TipoDocumentoInformatizadoEnum"];
         };
         TipoDocumentoDtoResponseListaRequeridos: {
             /** Format: int32 */
@@ -5645,8 +5626,6 @@ export interface components {
         };
         /** @enum {string} */
         TipoDocumentoInformatizadoEnum: TipoDocumentoInformatizadoEnum;
-        /** @enum {string} */
-        TipoDocumentoPrlEnum: TipoDocumentoPrlEnum;
         TipoDocumentoRelacionadoDtoResponse: {
             /** Format: int32 */
             idTipoDocumento?: number;
@@ -5665,31 +5644,10 @@ export interface components {
             especificidad?: components["schemas"]["EspecificidadEnum"];
         };
         TipoDocumentoUniversalDtoResponse: {
-            nombre?: string;
-            aplicableA?: components["schemas"]["AplicableAEnum1"];
-            departamentoArea?: components["schemas"]["DepartamentoAreaEnum"];
-            tipo?: components["schemas"]["TipoDocumentoPrlEnum"];
-            /** Format: int32 */
-            validez?: number;
-            unidadTiempoValidez?: components["schemas"]["UnidadTiempoValidezEnum"];
-            especificidad?: components["schemas"]["EspecificidadEnum1"];
-            /** Format: int32 */
-            idPais?: number;
-            codigoMetabuzon?: string;
-            indefinido?: boolean;
-            /** Format: int32 */
-            diasPreaviso?: number;
-            firmaRequerida?: boolean;
-            adjuntoObligatorio?: boolean;
-            /** Format: int32 */
-            idTipoDocumentoInformatizado?: number;
             /** Format: int32 */
             idTipoDocumentoUniversal?: number;
-            criteriosValidacionUltimaVersion?: components["schemas"]["CriterioEstandarDtoResponse"][];
-            versiones?: number[];
-            fechaUltimaVersion?: components["schemas"]["ZonedDateTime"];
-            usuarioUltimaVersion?: string;
-            enUso?: boolean;
+            nombre?: string;
+            aplicableA?: components["schemas"]["AplicableAEnum"];
         };
         /** @enum {string} */
         TipoEnum: TipoEnum;
@@ -6146,8 +6104,6 @@ export interface components {
         };
         /** @enum {string} */
         UnidadTiempoEnum: UnidadTiempoEnum;
-        /** @enum {string} */
-        UnidadTiempoValidezEnum: UnidadTiempoValidezEnum;
         UsuarioComunicacionDtoRequest: {
             /** Format: int32 */
             idEmpresa?: number;
@@ -6520,16 +6476,6 @@ export interface components {
             idsTipoEpiInsertados?: number[];
             idsTipoEpiEliminados?: number[];
         };
-        VersionDtoResponse: {
-            /** Format: int32 */
-            idVersionCriteriosValidacion?: number;
-            /** Format: int32 */
-            version?: number;
-            criteriosUniversales?: boolean;
-            fechaEdicion?: components["schemas"]["ZonedDateTime"];
-            usuarioEdicion?: string;
-            criteriosValidacion?: components["schemas"]["CriterioValidacionDtoResponse"][];
-        };
         ZoneId: {
             id?: string;
             rules?: components["schemas"]["ZoneRules"];
@@ -6609,7 +6555,6 @@ export type SchemaActividadUtDtoRabbit = components['schemas']['ActividadUtDTO_R
 export type SchemaActividadesEmpleadoDtoResponse = components['schemas']['ActividadesEmpleadoDtoResponse'];
 export type SchemaAdjuntoInfoDtoResponse = components['schemas']['AdjuntoInfoDtoResponse'];
 export type SchemaAplicableAEnum = components['schemas']['AplicableAEnum'];
-export type SchemaAplicableAEnum1 = components['schemas']['AplicableAEnum1'];
 export type SchemaArchivoDtoGet = components['schemas']['ArchivoDTO_GET'];
 export type SchemaArchivoDtoGetInfo = components['schemas']['ArchivoDTO_GET_INFO'];
 export type SchemaArchivoObservacionesDtoRequest = components['schemas']['ArchivoObservacionesDtoRequest'];
@@ -6623,12 +6568,10 @@ export type SchemaCausaTablaDtoResponse = components['schemas']['CausaTablaDtoRe
 export type SchemaCodigoValorDtoResponse = components['schemas']['CodigoValorDtoResponse'];
 export type SchemaColumnaTablaRiesgoDtoResponse = components['schemas']['ColumnaTablaRiesgoDtoResponse'];
 export type SchemaCorreoInformacionDto = components['schemas']['CorreoInformacionDto'];
-export type SchemaCriterioEstandarDtoResponse = components['schemas']['CriterioEstandarDtoResponse'];
 export type SchemaCriterioValidacionDtoRequest = components['schemas']['CriterioValidacionDtoRequest'];
 export type SchemaCriterioValidacionDtoResponse = components['schemas']['CriterioValidacionDtoResponse'];
 export type SchemaDayOfWeek = components['schemas']['DayOfWeek'];
 export type SchemaDepartamentoAreaEnum = components['schemas']['DepartamentoAreaEnum'];
-export type SchemaDepartamentoAreaEnum1 = components['schemas']['DepartamentoAreaEnum1'];
 export type SchemaDocumEstadoEnum = components['schemas']['DocumEstadoEnum'];
 export type SchemaDocumMetodoInsercionEnum = components['schemas']['DocumMetodoInsercionEnum'];
 export type SchemaDocumentoDtoPost = components['schemas']['DocumentoDTO_POST'];
@@ -6668,16 +6611,13 @@ export type SchemaEntornoEstadoEnum = components['schemas']['EntornoEstadoEnum']
 export type SchemaEntregaEpiDtoObservacionesRequest = components['schemas']['EntregaEpiDtoObservacionesRequest'];
 export type SchemaEntregaEpiDtoResponse = components['schemas']['EntregaEpiDtoResponse'];
 export type SchemaEspecificidadEnum = components['schemas']['EspecificidadEnum'];
-export type SchemaEspecificidadEnum1 = components['schemas']['EspecificidadEnum1'];
 export type SchemaEstadoEpiEnum = components['schemas']['EstadoEpiEnum'];
-export type SchemaEstadoFirmaEvaluadorEnum = components['schemas']['EstadoFirmaEvaluadorEnum'];
 export type SchemaEstadoFormacionEnum = components['schemas']['EstadoFormacionEnum'];
 export type SchemaEstadoGestionEnum = components['schemas']['EstadoGestionEnum'];
 export type SchemaEstadoGestionFormacionEmpleadoDto = components['schemas']['EstadoGestionFormacionEmpleadoDto'];
 export type SchemaEstadoGestionFormacionEnum = components['schemas']['EstadoGestionFormacionEnum'];
 export type SchemaEstadoGestionInformacionEnum = components['schemas']['EstadoGestionInformacionEnum'];
 export type SchemaEstadoInformacionDtoResponse = components['schemas']['EstadoInformacionDtoResponse'];
-export type SchemaEstadoInformeEvaluacionEnum = components['schemas']['EstadoInformeEvaluacionEnum'];
 export type SchemaEvaluacionActividadDtoRequest = components['schemas']['EvaluacionActividadDtoRequest'];
 export type SchemaEvaluacionActividadDtoResponse = components['schemas']['EvaluacionActividadDtoResponse'];
 export type SchemaEvaluacionDtoResponse = components['schemas']['EvaluacionDtoResponse'];
@@ -6686,8 +6626,6 @@ export type SchemaEvaluacionTablaDtoResponse = components['schemas']['Evaluacion
 export type SchemaEvaluacionUgDtoRequest = components['schemas']['EvaluacionUgDtoRequest'];
 export type SchemaEvaluacionUtDtoRequest = components['schemas']['EvaluacionUtDtoRequest'];
 export type SchemaEvaluacionesDeInformeDtoResponse = components['schemas']['EvaluacionesDeInformeDtoResponse'];
-export type SchemaEvaluadorDto = components['schemas']['EvaluadorDto'];
-export type SchemaEvaluadorFirmaResponse = components['schemas']['EvaluadorFirmaResponse'];
 export type SchemaFilaTablaRiesgoDtoResponse = components['schemas']['FilaTablaRiesgoDtoResponse'];
 export type SchemaFirmaDtoRequest = components['schemas']['FirmaDtoRequest'];
 export type SchemaFormacionDtoRequest = components['schemas']['FormacionDtoRequest'];
@@ -6833,9 +6771,13 @@ export type SchemaTimeDefinition = components['schemas']['TimeDefinition'];
 export type SchemaTipoDocPackDocumentalDtoRabbit = components['schemas']['TipoDocPackDocumentalDTO_Rabbit'];
 export type SchemaTipoDocumentoActividadDtoRabbit = components['schemas']['TipoDocumentoActividadDTO_Rabbit'];
 export type SchemaTipoDocumentoBasicoDtoResponse = components['schemas']['TipoDocumentoBasicoDtoResponse'];
+export type SchemaTipoDocumentoCriterioDto = components['schemas']['TipoDocumentoCriterioDto'];
+export type SchemaTipoDocumentoCriterioDtoPost = components['schemas']['TipoDocumentoCriterioDtoPost'];
+export type SchemaTipoDocumentoCriterioDtoResponse = components['schemas']['TipoDocumentoCriterioDtoResponse'];
+export type SchemaTipoDocumentoCriterioRequest = components['schemas']['TipoDocumentoCriterioRequest'];
+export type SchemaTipoDocumentoCriterioResponse = components['schemas']['TipoDocumentoCriterioResponse'];
 export type SchemaTipoDocumentoDtoGet = components['schemas']['TipoDocumentoDTO_GET'];
 export type SchemaTipoDocumentoDtoPerfilResponse = components['schemas']['TipoDocumentoDtoPerfilResponse'];
-export type SchemaTipoDocumentoDtoRabbitGrupoEmpresa = components['schemas']['TipoDocumentoDtoRabbitGrupoEmpresa'];
 export type SchemaTipoDocumentoDtoRequest = components['schemas']['TipoDocumentoDtoRequest'];
 export type SchemaTipoDocumentoDtoResponse = components['schemas']['TipoDocumentoDtoResponse'];
 export type SchemaTipoDocumentoDtoResponseList = components['schemas']['TipoDocumentoDtoResponseList'];
@@ -6844,7 +6786,6 @@ export type SchemaTipoDocumentoDtoResponseListaRequeridosEmpresa = components['s
 export type SchemaTipoDocumentoDtoResponseListaRequeridosRecursoMaterial = components['schemas']['TipoDocumentoDtoResponseListaRequeridosRecursoMaterial'];
 export type SchemaTipoDocumentoEntidadesEspecificasDtoResponse = components['schemas']['TipoDocumentoEntidadesEspecificasDtoResponse'];
 export type SchemaTipoDocumentoInformatizadoEnum = components['schemas']['TipoDocumentoInformatizadoEnum'];
-export type SchemaTipoDocumentoPrlEnum = components['schemas']['TipoDocumentoPrlEnum'];
 export type SchemaTipoDocumentoRelacionadoDtoResponse = components['schemas']['TipoDocumentoRelacionadoDtoResponse'];
 export type SchemaTipoDocumentoRequeridosDtoResponse = components['schemas']['TipoDocumentoRequeridosDtoResponse'];
 export type SchemaTipoDocumentoUniversalDtoResponse = components['schemas']['TipoDocumentoUniversalDtoResponse'];
@@ -6909,7 +6850,6 @@ export type SchemaUgSituacionEspecialRelContratacionEmpleadoDto = components['sc
 export type SchemaUgSituacionEspecialRelContratacionEmpleadoDtoResponse = components['schemas']['UgSituacionEspecialRelContratacionEmpleadoDtoResponse'];
 export type SchemaUgSituacionEspecialRelContratacionEmpleadoFechasDtoResponse = components['schemas']['UgSituacionEspecialRelContratacionEmpleadoFechasDtoResponse'];
 export type SchemaUnidadTiempoEnum = components['schemas']['UnidadTiempoEnum'];
-export type SchemaUnidadTiempoValidezEnum = components['schemas']['UnidadTiempoValidezEnum'];
 export type SchemaUsuarioComunicacionDtoRequest = components['schemas']['UsuarioComunicacionDtoRequest'];
 export type SchemaUtActividadDto = components['schemas']['UtActividadDto'];
 export type SchemaUtActividadDtoRabbitResponse = components['schemas']['UtActividadDtoRabbitResponse'];
@@ -6954,7 +6894,6 @@ export type SchemaUtSituacionEspecialRelContratacionEmpleadoDto = components['sc
 export type SchemaUtSituacionEspecialRelContratacionEmpleadoDtoResponse = components['schemas']['UtSituacionEspecialRelContratacionEmpleadoDtoResponse'];
 export type SchemaUtSituacionEspecialRelContratacionEmpleadoFechasDtoResponse = components['schemas']['UtSituacionEspecialRelContratacionEmpleadoFechasDtoResponse'];
 export type SchemaUtTipoEpiDtoRabbit = components['schemas']['UtTipoEpiDtoRabbit'];
-export type SchemaVersionDtoResponse = components['schemas']['VersionDtoResponse'];
 export type SchemaZoneId = components['schemas']['ZoneId'];
 export type SchemaZoneOffset = components['schemas']['ZoneOffset'];
 export type SchemaZoneOffsetTransition = components['schemas']['ZoneOffsetTransition'];
@@ -7723,7 +7662,7 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["RequestBodyTripleListaObjetoUtActividadDtoRequestUtDto"];
             };
@@ -7881,6 +7820,240 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getCriteriosValidacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CriterioValidacionDtoResponse"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    postCriterioValidacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CriterioValidacionDtoRequest"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CriterioValidacionDtoResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getCriterioValidacionPorIdCriterioValidacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idCriterioValidacion: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CriterioValidacionDtoResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    putCriterioValidacionPorIdCriterioValidacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idCriterioValidacion: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CriterioValidacionDtoRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CriterioValidacionDtoResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    deleteCriterioValidacionPorIdCriterioValidacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idCriterioValidacion: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CriterioValidacionDtoResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -14787,6 +14960,106 @@ export interface operations {
             };
         };
     };
+    postAdjuntoPorIdEvaluacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idEvaluacion: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    file: string;
+                    fileName: string;
+                };
+            };
+        };
+        responses: {
+            /** @description CREATE */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": components["schemas"]["ArchivoDTO_GET_INFO"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description No encontrado */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getInformacionAdjuntoPorIdEvaluacion: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idEvaluacion: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArchivoDTO_GET_INFO"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     postRiesgoPorIdEvaluacion: {
         parameters: {
             query?: never;
@@ -16725,7 +16998,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0161: No se puede añadir o eliminar evaluaciones a un informe que está generando pdfs */
+            /** @description Forbidden */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -16782,8 +17055,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0016 : No se le puede añadir un informe a una UG que no ha sido evaluada
-             *     - CAE_0161: No se puede añadir o eliminar evaluaciones a un informe que está generando pdfs */
+            /** @description - CAE_0016 : No se le puede añadir un informe a una UG que no ha sido evaluada */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -16840,8 +17112,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0016 : No se le puede añadir un informe a una UG que no ha sido evaluada
-             *     - CAE_0161: No se puede añadir o eliminar evaluaciones a un informe que está generando pdfs */
+            /** @description - CAE_0016 : No se le puede añadir un informe a una UG que no ha sido evaluada */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -16898,7 +17169,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0157 : No se le puede añadir un informe a una UT que no ha sido evaluada- CAE_0161: No se puede añadir o eliminar evaluaciones a un informe que está generando pdfs */
+            /** @description - CAE_0157 : No se le puede añadir un informe a una UT que no ha sido evaluada */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -16955,116 +17226,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0157 : No se le puede añadir un informe a una UT que no ha sido evaluada- CAE_0161: No se puede añadir o eliminar evaluaciones a un informe que está generando pdfs */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    getEvaluadoresInformeEvaluacion: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Zona horaria desde la que se hace la petición */
-                "X-Timezone": string;
-            };
-            path: {
-                idInformeEvaluacion: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EvaluadorFirmaResponse"][];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    postFirmarInformeEvaluacionEvaluador: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Zona horaria desde la que se hace la petición */
-                "X-Timezone": string;
-            };
-            path: {
-                idInformeEvaluacion: number;
-                idUsuarioEvaluador: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "multipart/form-data": {
-                    cargo?: string;
-                    /** Format: binary */
-                    firma: string;
-                    nif: string;
-                    nombre: string;
-                    uuid: string;
-                };
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Forbidden */
+            /** @description - CAE_0157 : No se le puede añadir un informe a una UT que no ha sido evaluada */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -17121,7 +17283,7 @@ export interface operations {
                 };
                 content?: never;
             };
-            /** @description - CAE_0160: El pdf no está listo para generarse */
+            /** @description Forbidden */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -17130,43 +17292,6 @@ export interface operations {
             };
             /** @description Not Found */
             404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    generarInformeEvaluacionParcial: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Zona horaria desde la que se hace la petición */
-                "X-Timezone": string;
-            };
-            path: {
-                idInformeEvaluacion: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description - CAE_0159: No se puede generar los pdfs si ya existen o se están generando */
-            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -19950,7 +20075,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TipoDocumentoDtoRabbitGrupoEmpresa"];
+                    "application/json": components["schemas"]["TipoDocumentoDtoResponse"];
                 };
             };
             /** @description Bad Request */
@@ -19984,6 +20109,45 @@ export interface operations {
             };
             /** @description Not found */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getTiposDocumentosUniversales: {
+        parameters: {
+            query?: {
+                aplicableA?: components["schemas"]["AplicableAEnum"];
+            };
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TipoDocumentoUniversalDtoResponse"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -20118,7 +20282,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TipoDocumentoDtoRabbitGrupoEmpresa"];
+                    "application/json": components["schemas"]["TipoDocumentoDtoResponse"];
                 };
             };
             /** @description Bad Request */
@@ -20239,6 +20403,110 @@ export interface operations {
                 content?: never;
             };
             /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getCriteriosValidacionPorIdTipoDocumento: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idTipoDocumento: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TipoDocumentoCriterioDtoResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    postCriteriosValidacionPorIdTipoDocumento: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Zona horaria desde la que se hace la petición */
+                "X-Timezone": string;
+            };
+            path: {
+                idTipoDocumento: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["TipoDocumentoCriterioRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TipoDocumentoCriterioResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description - CAE_0076: El criterio de validación a eliminar no está relacionado con este tipo de documento.
+             *      - CAE_0077: El criterio de validación a editar no está relacionado con este tipo de documento. */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -20867,53 +21135,6 @@ export interface operations {
             };
             /** @description - CAE_0066: Para este tipo de documento no se puede insertar un adjunto que no sea PDF
              *      - ARC_0002 : No se ha podido recuperar el tipo del archivo a insertar */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    getVersionPorIdTipoDocumentoPorVersion: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Zona horaria desde la que se hace la petición */
-                "X-Timezone": string;
-            };
-            path: {
-                idTipoDocumento: number;
-                version: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["VersionDtoResponse"][];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Forbidden */
             403: {
                 headers: {
                     [name: string]: unknown;
@@ -22256,11 +22477,6 @@ export enum AplicableAEnum {
     EMPLEADO = "EMPLEADO",
     RECURSO = "RECURSO"
 }
-export enum AplicableAEnum1 {
-    EMPRESA = "EMPRESA",
-    EMPLEADO = "EMPLEADO",
-    RECURSO = "RECURSO"
-}
 export enum CausaConsecuenciaEnum {
     DANINO = "DANINO",
     EXTREMADAMENTE_DANINO = "EXTREMADAMENTE_DANINO",
@@ -22289,13 +22505,7 @@ export enum DayOfWeek {
 }
 export enum DepartamentoAreaEnum {
     PRL = "PRL",
-    ADMINISTRACION = "ADMINISTRACION",
-    OTROS = "OTROS"
-}
-export enum DepartamentoAreaEnum1 {
-    PRL = "PRL",
-    ADMINISTRACION = "ADMINISTRACION",
-    OTROS = "OTROS"
+    ADMINISTRACION = "ADMINISTRACION"
 }
 export enum DocumEstadoEnum {
     PENDIENTE = "PENDIENTE",
@@ -22320,18 +22530,9 @@ export enum EspecificidadEnum {
     GENERICO = "GENERICO",
     ESPECIFICO = "ESPECIFICO"
 }
-export enum EspecificidadEnum1 {
-    GENERICO = "GENERICO",
-    ESPECIFICO = "ESPECIFICO"
-}
 export enum EstadoEpiEnum {
     OK = "OK",
     ERROR = "ERROR"
-}
-export enum EstadoFirmaEvaluadorEnum {
-    FIRMADO = "FIRMADO",
-    PREPARANDO_FIRMA = "PREPARANDO_FIRMA",
-    PENDIENTE_FIRMA = "PENDIENTE_FIRMA"
 }
 export enum EstadoFormacionEnum {
     PLANIFICADA = "PLANIFICADA",
@@ -22361,11 +22562,6 @@ export enum EstadoGestionInformacionEnum {
     REENVIADO_PENDIENTE_FIRMA = "REENVIADO_PENDIENTE_FIRMA",
     FINALIZADO = "FINALIZADO"
 }
-export enum EstadoInformeEvaluacionEnum {
-    NO_PREPARADO = "NO_PREPARADO",
-    PREPARANDO = "PREPARANDO",
-    PREPARADO = "PREPARADO"
-}
 export enum InformacionVigenciaEnum {
     EN_VIGOR = "EN_VIGOR",
     EXPIRADO = "EXPIRADO",
@@ -22375,8 +22571,7 @@ export enum InformacionVigenciaEnum {
 }
 export enum InformeEnum {
     EVALUACIONES_RIESGO = "EVALUACIONES_RIESGO",
-    ENTREGA_EPI = "ENTREGA_EPI",
-    INFORME_EVALUACION_PARCIAL = "INFORME_EVALUACION_PARCIAL"
+    ENTREGA_EPI = "ENTREGA_EPI"
 }
 export enum Month {
     JANUARY = "JANUARY",
@@ -22413,19 +22608,11 @@ export enum TipoDocumentoInformatizadoEnum {
     CERTIFICADO_SS = "CERTIFICADO_SS",
     TC1_RLC = "TC1_RLC"
 }
-export enum TipoDocumentoPrlEnum {
-    FORMACIONES = "FORMACIONES",
-    INFORMACIONES = "INFORMACIONES",
-    EPI = "EPI",
-    RECONOCIMIENTO_MEDICO = "RECONOCIMIENTO_MEDICO",
-    OTROS = "OTROS"
-}
 export enum TipoEnum {
     FORMACIONES = "FORMACIONES",
     INFORMACIONES = "INFORMACIONES",
     EPI = "EPI",
-    RECONOCIMIENTO_MEDICO = "RECONOCIMIENTO_MEDICO",
-    OTROS = "OTROS"
+    RECONOCIMIENTO_MEDICO = "RECONOCIMIENTO_MEDICO"
 }
 export enum TipoEpiCategoriaEnum {
     I = "I",
@@ -22473,9 +22660,4 @@ export enum UnidadTiempoEnum {
     DIAS = "DIAS",
     MESES = "MESES",
     ANOS = "ANOS"
-}
-export enum UnidadTiempoValidezEnum {
-    ANOS = "ANOS",
-    MESES = "MESES",
-    DIAS = "DIAS"
 }
